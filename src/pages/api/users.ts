@@ -3,6 +3,7 @@ import { PrismaClient } from "@prisma/client"
 const prisma = new PrismaClient()
 
 export default async function handler(req: any, res: any) {
+    
     if(req.method === 'POST') {
         const { name , email } = req.body
 
@@ -10,6 +11,7 @@ export default async function handler(req: any, res: any) {
             data: { name, email}
         })
         res.status(200).json(user)
+    
     } else if (req.method === 'GET') {
         const users = await prisma.user.findMany()
         res.status(200).json(users)
